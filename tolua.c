@@ -2255,7 +2255,7 @@ void tolua_openfixedmap(lua_State *L)
 	lua_rawseti(L, LUA_REGISTRYINDEX, LUA_RIDX_FIXEDMAP);		
 }
 
-//对于下列读取lua 特定文件需要判空报错
+
 void tolua_openvaluetype(lua_State *L)
 {
 	lua_getglobal(L, "GetLuaValueType");
@@ -2559,6 +2559,8 @@ static const struct luaL_Reg tolua_mathf[] =
     { NULL, NULL }
 };
 
+int luaopen_luapbintf(lua_State* L);
+
 LUALIB_API void tolua_openlibs(lua_State *L)
 {   
     initmodulebuffer();
@@ -2574,6 +2576,11 @@ LUALIB_API void tolua_openlibs(lua_State *L)
     tolua_openuint64(L);
     tolua_openvptr(L);    
     //tolua_openrequire(L);
+	{
+		//luapbintf
+		luaopen_luapbintf(L);
+		lua_setfield(L, LUA_GLOBALSINDEX, "pb");
+	}
 
     luaL_register(L, "Mathf", tolua_mathf);     
     luaL_register(L, "tolua", tolua_funcs);    

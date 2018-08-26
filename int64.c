@@ -156,7 +156,8 @@ LUALIB_API int64_t tolua_toint64(lua_State* L, int pos)
     return n;
 }
 
-static int64_t tolua_checkint64(lua_State* L, int pos)
+LUALIB_API int64_t tolua_checkint64(lua_State* L, int pos)
+//YOOZOO static int64_t tolua_checkint64(lua_State* L, int pos)
 {
     int64_t n = 0;
     int type = lua_type(L, pos);

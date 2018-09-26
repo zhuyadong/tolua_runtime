@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B04F77F215BF4BB007DF250 /* LuaPbIntf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B04F77E215BF4BB007DF250 /* LuaPbIntf.cpp */; };
+		2B04F783215BF4D8007DF250 /* MsgToTbl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B04F780215BF4D8007DF250 /* MsgToTbl.cpp */; };
+		2B04F784215BF4D8007DF250 /* LuaPbIntfImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B04F781215BF4D8007DF250 /* LuaPbIntfImpl.cpp */; };
+		2B04F785215BF4D8007DF250 /* MessageSetter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B04F782215BF4D8007DF250 /* MessageSetter.cpp */; };
 		8400929F1CCF43D600F89A56 /* tolua.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8400929E1CCF43D600F89A56 /* tolua.h */; };
 		840092A11CCF43D600F89A56 /* tolua.m in Sources */ = {isa = PBXBuildFile; fileRef = 840092A01CCF43D600F89A56 /* tolua.m */; };
 		840092A81CCF44F800F89A56 /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 840092A71CCF44F800F89A56 /* libluajit.a */; };
@@ -50,6 +54,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2B04F77E215BF4BB007DF250 /* LuaPbIntf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaPbIntf.cpp; path = ../../../LuaPbIntf/src/LuaPbIntf.cpp; sourceTree = "<group>"; };
+		2B04F780215BF4D8007DF250 /* MsgToTbl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MsgToTbl.cpp; path = ../../../LuaPbIntf/src/detail/MsgToTbl.cpp; sourceTree = "<group>"; };
+		2B04F781215BF4D8007DF250 /* LuaPbIntfImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaPbIntfImpl.cpp; path = ../../../LuaPbIntf/src/detail/LuaPbIntfImpl.cpp; sourceTree = "<group>"; };
+		2B04F782215BF4D8007DF250 /* MessageSetter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MessageSetter.cpp; path = ../../../LuaPbIntf/src/detail/MessageSetter.cpp; sourceTree = "<group>"; };
 		8400929B1CCF43D600F89A56 /* libtolua.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtolua.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8400929E1CCF43D600F89A56 /* tolua.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tolua.h; sourceTree = "<group>"; };
 		840092A01CCF43D600F89A56 /* tolua.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tolua.m; sourceTree = "<group>"; };
@@ -110,6 +118,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B04F77D215BF480007DF250 /* luapbintf */ = {
+			isa = PBXGroup;
+			children = (
+				2B04F781215BF4D8007DF250 /* LuaPbIntfImpl.cpp */,
+				2B04F782215BF4D8007DF250 /* MessageSetter.cpp */,
+				2B04F780215BF4D8007DF250 /* MsgToTbl.cpp */,
+				2B04F77E215BF4BB007DF250 /* LuaPbIntf.cpp */,
+			);
+			path = luapbintf;
+			sourceTree = "<group>";
+		};
 		840092921CCF43D600F89A56 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +148,7 @@
 		8400929D1CCF43D600F89A56 /* tolua */ = {
 			isa = PBXGroup;
 			children = (
+				2B04F77D215BF480007DF250 /* luapbintf */,
 				840092BD1CCF45A800F89A56 /* luasocket */,
 				840092B31CCF455100F89A56 /* cjson */,
 				840092A91CCF450F00F89A56 /* int64.c */,
@@ -259,9 +279,11 @@
 				840092E41CCF45A800F89A56 /* except.c in Sources */,
 				840092AC1CCF451400F89A56 /* lpeg.c in Sources */,
 				840092BB1CCF455100F89A56 /* lua_cjson.c in Sources */,
+				2B04F785215BF4D8007DF250 /* MessageSetter.cpp in Sources */,
 				840092B01CCF452100F89A56 /* struct.c in Sources */,
 				840092B21CCF452700F89A56 /* tolua.c in Sources */,
 				8445EB151D4C9F8A00397F5E /* uint64.c in Sources */,
+				2B04F783215BF4D8007DF250 /* MsgToTbl.cpp in Sources */,
 				840092E71CCF45A800F89A56 /* luasocket.c in Sources */,
 				840092EC1CCF45A800F89A56 /* tcp.c in Sources */,
 				840092F01CCF45A800F89A56 /* usocket.c in Sources */,
@@ -272,6 +294,8 @@
 				840092E81CCF45A800F89A56 /* mime.c in Sources */,
 				840092AE1CCF451C00F89A56 /* pb.c in Sources */,
 				840092E61CCF45A800F89A56 /* io.c in Sources */,
+				2B04F77F215BF4BB007DF250 /* LuaPbIntf.cpp in Sources */,
+				2B04F784215BF4D8007DF250 /* LuaPbIntfImpl.cpp in Sources */,
 				840092BA1CCF455100F89A56 /* fpconv.c in Sources */,
 				840092E21CCF45A800F89A56 /* buffer.c in Sources */,
 				840092BC1CCF455100F89A56 /* strbuf.c in Sources */,
@@ -371,7 +395,12 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				GCC_C_LANGUAGE_STANDARD = c99;
-				HEADER_SEARCH_PATHS = "../luajit-2.1/src";
+				HEADER_SEARCH_PATHS = (
+					"../luajit-2.1/src",
+					../protobuf/include,
+					"../LuaPbIntf/third_party/lua-intf",
+					LuaPbIntf/src,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -388,7 +417,12 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				GCC_C_LANGUAGE_STANDARD = c99;
-				HEADER_SEARCH_PATHS = "../luajit-2.1/src";
+				HEADER_SEARCH_PATHS = (
+					"../luajit-2.1/src",
+					../protobuf/include,
+					"../LuaPbIntf/third_party/lua-intf",
+					LuaPbIntf/src,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

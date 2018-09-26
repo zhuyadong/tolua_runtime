@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.6.0)
 project(tolua VERSION 0.1.0)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 include(cmake/ucm.cmake)
 ucm_set_runtime(STATIC)
@@ -10,19 +11,6 @@ include_directories(SYSTEM
     ${tolua_SOURCE_DIR}/LuaPbIntf/src
     ${tolua_SOURCE_DIR}/LuaPbIntf/third_party/lua-intf
 )
-if(${CMAKE_BUILD_TYPE} MATCHES "Release")
-    link_directories(
-        ${tolua_SOURCE_DIR}/window/x86_64
-        #${tolua_SOURCE_DIR}/LuaPbIntf/premake/vs2017/bin/x64/Release
-        ${tolua_SOURCE_DIR}/protobuf/lib
-        )
-else()
-    link_directories(
-        ${tolua_SOURCE_DIR}/window/x86_64
-        #${tolua_SOURCE_DIR}/LuaPbIntf/premake/vs2017/bin/x64/Release
-        ${tolua_SOURCE_DIR}/protobuf/lib
-        )
-endif()
 set(tolua_SOURCES
     ${tolua_SOURCE_DIR}/cjson/fpconv.c
     ${tolua_SOURCE_DIR}/cjson/lua_cjson.c
@@ -49,6 +37,29 @@ set(tolua_SOURCES
     ${tolua_SOURCE_DIR}/uint64.c
     ${tolua_SOURCE_DIR}/lua.def
 )
+if (MSVC)
+    link_directories(
+        ${tolua_SOURCE_DIR}/window/x86_64
+        ${tolua_SOURCE_DIR}/protobuf/lib
+    )
+    add_definitions(
+        /wd4244
+        /wd4267
+        /wd4133
+        /wd4996
+    )
+else()
+    if(CMAKE_SYSTEM_NAME MATCHES "Android")
+        link_directories(
+            ${tolua_SOURCE_DIR}/android/jni
+            ${tolua_SOURCE_DIR}/protobuf/lib
+        )
+    else()
+    endif()
+    set(CMAKE_C_STANDARD 99)
+    ucm_remove_files(${tolua_SOURCE_DIR}/luasocket/wsocket.c FROM tolua_SOURCES)
+    ucm_add_files(${tolua_SOURCE_DIR}/luasocket/usocket.c TO tolua_SOURCES)
+endif()
 add_library(tolua SHARED
     ${tolua_SOURCES}
 )
@@ -62,27 +73,27 @@ set(pb_SOURCES
 add_library(luapbintf STATIC
     ${pb_SOURCES}
 )
-if (MSVC)
-    add_definitions(
-        /wd4244
-        /wd4267
-        /wd4133
-        /wd4996
-    )
-endif()
 
-if(${CMAKE_BUILD_TYPE} MATCHES "Release")
-    target_link_libraries(tolua
-        lua51
-        ws2_32
-        luapbintf
-        libprotobuf
-        )
+if(MSVC)
+    if(${CMAKE_BUILD_TYPE} MATCHES "Release")
+        target_link_libraries(tolua
+            lua51
+            ws2_32
+            luapbintf
+            libprotobuf
+            )
+    else()
+        target_link_libraries(tolua
+            lua51
+            ws2_32
+            luapbintf
+            libprotobuf
+            )
+    endif()
 else()
     target_link_libraries(tolua
-        lua51
-        ws2_32
-        luapbintf
-        libprotobuf
-        )
+            luajit
+            luapbintf
+            protobuf
+    )
 endif()

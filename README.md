@@ -23,3 +23,17 @@ https://github.com/diegonehab/luasocket<br>
 http://www.inf.puc-rio.br/~roberto/struct/<br>
 **lpeg**<br>
 http://www.inf.puc-rio.br/~roberto/lpeg/lpeg.html
+
+# zhuyadong补充说明
+现在编译android和ios，都在mac下编译
+## android编译
+* 下载ndk放到~/.local/android-ndk-r10e
+* `$ export NDK=~/.local/android-ndk-r10e`
+* `build_arm.sh`  这只会生成android/jni/libluajit.a，生成tolua看下面步骤
+* `mkdir build_android && cd build_android`
+* `cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..`
+* `make` make之前，确认编译好的android版本的libprotobuf.a已经放在protobuf/lib下或者android/jni下
+
+## iOS编译
+确认装好了xcode, 并且`xcode-select -p`的输出是`/Applications/Xcode.app/Contents/Developer`
+* `build_ios.sh`

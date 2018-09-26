@@ -1,4 +1,4 @@
-﻿/*
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015-2016 topameng(topameng@qq.com)
@@ -112,8 +112,7 @@ LUALIB_API void tolua_pushint64(lua_State* L, int64_t n)
 		lua_rawget(L, -2);
 	}
 
-	lua_replace(L, -3);
-	lua_pop(L, 1);
+	lua_replace(L, -2);
 	/*YOOZOO}*/
 }
 

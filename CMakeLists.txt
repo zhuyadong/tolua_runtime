@@ -7,6 +7,8 @@ ucm_set_runtime(STATIC)
 
 include_directories(SYSTEM
     ${tolua_SOURCE_DIR}/luajit-2.1/src
+    #${tolua_SOURCE_DIR}/lua-5.2.4/src
+    #${tolua_SOURCE_DIR}/lua-5.1.5/src
     ${tolua_SOURCE_DIR}/protobuf/include
     ${tolua_SOURCE_DIR}/LuaPbIntf/src
     ${tolua_SOURCE_DIR}/LuaPbIntf/third_party/lua-intf
@@ -36,6 +38,10 @@ set(tolua_SOURCES
     ${tolua_SOURCE_DIR}/tolua.c
     ${tolua_SOURCE_DIR}/uint64.c
     ${tolua_SOURCE_DIR}/lua.def
+    ${tolua_SOURCE_DIR}/LuaPbIntf/src/LuaPbIntf.cpp
+    ${tolua_SOURCE_DIR}/LuaPbIntf/src/detail/LuaPbIntfImpl.cpp
+    ${tolua_SOURCE_DIR}/LuaPbIntf/src/detail/MessageSetter.cpp
+    ${tolua_SOURCE_DIR}/LuaPbIntf/src/detail/MsgToTbl.cpp
 )
 if (MSVC)
     link_directories(
@@ -55,45 +61,52 @@ else()
             ${tolua_SOURCE_DIR}/protobuf/lib
         )
     else()
+        link_directories(
+            ${tolua_SOURCE_DIR}/protobuf/lib
+        )
     endif()
     set(CMAKE_C_STANDARD 99)
     ucm_remove_files(${tolua_SOURCE_DIR}/luasocket/wsocket.c FROM tolua_SOURCES)
     ucm_add_files(${tolua_SOURCE_DIR}/luasocket/usocket.c TO tolua_SOURCES)
 endif()
-add_library(tolua SHARED
-    ${tolua_SOURCES}
-)
+if (MSVC)
+	add_library(tolua SHARED
+	    ${tolua_SOURCES}
+	)
+elseif(CMAKE_SYSTEM_NAME MATCHES "Android")
+	add_library(tolua SHARED
+	    ${tolua_SOURCES}
+	)
+else()
+	add_library(tolua STATIC
+	    ${tolua_SOURCES}
+	)
+endif()
 
-set(pb_SOURCES 
-    ${tolua_SOURCE_DIR}/LuaPbIntf/src/LuaPbIntf.cpp
-    ${tolua_SOURCE_DIR}/LuaPbIntf/src/detail/LuaPbIntfImpl.cpp
-    ${tolua_SOURCE_DIR}/LuaPbIntf/src/detail/MessageSetter.cpp
-    ${tolua_SOURCE_DIR}/LuaPbIntf/src/detail/MsgToTbl.cpp
-)
-add_library(luapbintf STATIC
-    ${pb_SOURCES}
-)
 
 if(MSVC)
     if(${CMAKE_BUILD_TYPE} MATCHES "Release")
         target_link_libraries(tolua
             lua51
             ws2_32
-            luapbintf
             libprotobuf
             )
     else()
         target_link_libraries(tolua
             lua51
             ws2_32
-            luapbintf
             libprotobuf
             )
     endif()
+elseif(CMAKE_SYSTEM_NAME MATCHES "Android")
+    target_link_libraries(tolua
+            luajit
+            protobuf
+	        log
+    )
 else()
     target_link_libraries(tolua
             luajit
-            luapbintf
             protobuf
     )
 endif()

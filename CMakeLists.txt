@@ -56,10 +56,19 @@ if (MSVC)
     )
 else()
     if(CMAKE_SYSTEM_NAME MATCHES "Android")
-        link_directories(
-            ${tolua_SOURCE_DIR}/android/jni
-            ${tolua_SOURCE_DIR}/protobuf/lib
-        )
+        if(ANDROID_ABI MATCHES armeabi-v7a)
+            link_directories(
+                ${tolua_SOURCE_DIR}/android/jni/armeabi-v7a
+            )    
+        elseif(ANDROID_ABI MATCHES arm64-v8a)
+            link_directories(
+                ${tolua_SOURCE_DIR}/android/jni/arm64-v8a
+            )
+        elseif(ANDROID_ABI MATCHES x86)
+            link_directories(
+                ${tolua_SOURCE_DIR}/android/jni/x86
+            )
+        endif()
     else()
         link_directories(
             ${tolua_SOURCE_DIR}/protobuf/lib

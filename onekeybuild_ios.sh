@@ -26,4 +26,4 @@ cd ./build_ios
 cmake ../ -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DCMAKE_BUILD_TYPE=Release
 make -j 7
 
-echo libtolua.lib "=>" $(pwd|awk '{print $1"/libtolua.lib"}')
+echo libtolua.a "=>" $(pwd|awk '{print $1"/libtolua.a"}')

@@ -44,10 +44,17 @@ set(tolua_SOURCES
     ${tolua_SOURCE_DIR}/LuaPbIntf/src/detail/MsgToTbl.cpp
 )
 if (MSVC)
-    link_directories(
+    if(CMAKE_VS_PLATFORM_NAME MATCHES x64)
+        link_directories(
         ${tolua_SOURCE_DIR}/window/x86_64
         ${tolua_SOURCE_DIR}/protobuf/lib
     )
+    else()
+        link_directories(
+        ${tolua_SOURCE_DIR}/window/x86
+        ${tolua_SOURCE_DIR}/protobuf/lib
+    )
+    endif()
     add_definitions(
         /wd4244
         /wd4267
@@ -96,13 +103,13 @@ endif()
 if(MSVC)
     if(${CMAKE_BUILD_TYPE} MATCHES "Release")
         target_link_libraries(tolua
-            lua51
+            luajit
             ws2_32
             libprotobuf
             )
     else()
         target_link_libraries(tolua
-            lua51
+            luajit
             ws2_32
             libprotobuf
             )

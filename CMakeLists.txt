@@ -111,7 +111,7 @@ if(MSVC)
         target_link_libraries(tolua
             luajit
             ws2_32
-            libprotobuf
+            libprotobufd
             )
     endif()
 elseif(CMAKE_SYSTEM_NAME MATCHES "Android")

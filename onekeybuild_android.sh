@@ -56,12 +56,13 @@ cmake ../ -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DCMAK
 make -j 7 
 mkdir ./armeabi-v7a
 cp ./libtolua.so ./armeabi-v7a/
-
+$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/arm-linux-androideabi/bin/strip ./armeabi-v7a/libtolua.so
 # echo "- build tolua_runtime - arm64-v8a"
 # cmake ../ -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI=arm64-v8a
 # make -j 7 
 # mkdir arm64-v8a
 # cp ./libtolua.so ./arm64-v8a/
+# $NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/arm-linux-androideabi/bin/strip ./arm64-v8a/libtolua.so
 
 echo "- build tolua_runtime - x86"
 rm ./CMakeCache.txt
@@ -69,6 +70,7 @@ cmake ../ -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DCMAK
 make -j 7 
 mkdir ./x86
 cp ./libtolua.so ./x86/
+$NDK/toolchains/x86-4.9/prebuilt/darwin-x86_64/i686-linux-android/bin/strip ./x86/libtolua.so
 
 echo "--- output libtolua.so"
 echo libtolua.so "=>" $(pwd|awk '{print $1"/armeabi-v7a/libtolua.so"}')

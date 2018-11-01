@@ -76,6 +76,10 @@ else()
                 ${tolua_SOURCE_DIR}/android/jni/x86
             )
         endif()
+    elseif(APPLE)
+            link_directories(
+            ${tolua_SOURCE_DIR}/mac
+        )
     else()
         link_directories(
             ${tolua_SOURCE_DIR}/protobuf/lib
@@ -93,6 +97,9 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Android")
 	add_library(tolua SHARED
 	    ${tolua_SOURCES}
 	)
+elseif(APPLE)
+    add_library(tolua MODULE ${tolua_SOURCES})
+    set_target_properties(tolua PROPERTIES BUNDLE TRUE)
 else()
 	add_library(tolua STATIC
 	    ${tolua_SOURCES}
@@ -111,7 +118,7 @@ if(MSVC)
         target_link_libraries(tolua
             luajit
             ws2_32
-            libprotobufd
+            libprotobuf
             )
     endif()
 elseif(CMAKE_SYSTEM_NAME MATCHES "Android")
@@ -119,6 +126,11 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Android")
             luajit
             protobuf
 	        log
+    )
+elseif(APPLE)
+    target_link_libraries(tolua
+            lua
+            protobuf
     )
 else()
     target_link_libraries(tolua

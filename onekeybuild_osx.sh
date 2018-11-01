@@ -15,7 +15,7 @@ find . -name '*.cc' | xargs sed -i '' 's/google /googlex /g'
 mkdir ./build_osx
 cd ./build_osx
 cmake ../cmake
-make -j 6 libprotobuf
+make -j 10 libprotobuf
 echo "./build_osx/libprotobuf.a"
 
 #build tolua_runtime
@@ -30,8 +30,7 @@ find . -name '*.cpp' | xargs sed -i '' 's/google /googlex /g'
 cd ..
 mkdir ./build_osx
 cd ./build_osx
-rm ./CMakeCache.txt
-cmake ../
-make clean
-make -j 6
+rm -rf *
+cmake .. -DCMAKE_FORCE_PLATFORM_NAME=OSX
+make -j 10
 echo tolua.bundle "=>" $(pwd|awk '{print $1"/tolua.bundle"}')

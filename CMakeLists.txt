@@ -5,12 +5,18 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 include(cmake/ucm.cmake)
 ucm_set_runtime(STATIC)
 
+if(CMAKE_FORCE_PLATFORM_NAME MATCHES OSX)
+    message("=====this is osx")
+else()
+    message("=====this is not osx")
+endif()
+
 include_directories(SYSTEM
     ${tolua_SOURCE_DIR}/protobuf/include
     ${tolua_SOURCE_DIR}/LuaPbIntf/src
     ${tolua_SOURCE_DIR}/LuaPbIntf/third_party/lua-intf
 )
-if(Darwin)
+if(CMAKE_FORCE_PLATFORM_NAME MATCHES OSX)
     include_directories(SYSTEM
         ${tolua_SOURCE_DIR}/lua-5.1.5/src
     )
@@ -83,7 +89,7 @@ else()
                 ${tolua_SOURCE_DIR}/android/jni/x86
             )
         endif()
-    elseif(Darwin)
+    elseif(CMAKE_FORCE_PLATFORM_NAME MATCHES OSX)
             link_directories(
             ${tolua_SOURCE_DIR}/mac
         )
@@ -104,7 +110,7 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Android")
 	add_library(tolua SHARED
 	    ${tolua_SOURCES}
 	)
-elseif(Darwin)
+elseif(CMAKE_FORCE_PLATFORM_NAME MATCHES OSX)
     add_library(tolua MODULE ${tolua_SOURCES})
     set_target_properties(tolua PROPERTIES BUNDLE TRUE)
 else()
@@ -134,7 +140,7 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Android")
             protobuf
 	        log
     )
-elseif(Darwin)
+elseif(CMAKE_FORCE_PLATFORM_NAME MATCHES OSX)
     target_link_libraries(tolua
             lua
             protobuf

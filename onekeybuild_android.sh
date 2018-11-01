@@ -13,21 +13,21 @@ cd ./build_android
 echo "- build protobuf - armeabi-v7a"
 rm ./CMakeCache.txt
 cmake ../cmake/ -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI="armeabi-v7a"
-make -j 7 libprotobuf
+make -j 10 libprotobuf
 mkdir armeabi-v7a
 cp ./libprotobuf.a ./armeabi-v7a/
 ##arm64-v8a
 echo "- build protobuf - arm64-v8a"
 rm ./CMakeCache.txt
 cmake ../cmake/ -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI="arm64-v8a"
-make -j 7 libprotobuf
+make -j 10 libprotobuf
 mkdir arm64-v8a
 cp ./libprotobuf.a ./arm64-v8a/
 ##x86
 echo "- build protobuf - x86"
 rm ./CMakeCache.txt
 cmake ../cmake/ -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI="x86"
-make -j 7 libprotobuf
+make -j 10 libprotobuf
 mkdir x86
 cp ./libprotobuf.a ./x86/
 
@@ -53,7 +53,7 @@ cd ./build_android
 echo "- build tolua_runtime - armeabi-v7a"
 rm ./CMakeCache.txt
 cmake ../ -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI=armeabi-v7a
-make -j 7 
+make -j 10 
 mkdir ./armeabi-v7a
 cp ./libtolua.so ./armeabi-v7a/
 $NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/arm-linux-androideabi/bin/strip ./armeabi-v7a/libtolua.so
@@ -61,7 +61,7 @@ $NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/arm-linux-andro
 echo "- build tolua_runtime - arm64-v8a"
 rm ./CMakeCache.txt
 cmake ../ -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI=arm64-v8a
-make -j 7 
+make -j 10 
 mkdir arm64-v8a
 cp ./libtolua.so ./arm64-v8a/
 $NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/arm-linux-androideabi/bin/strip ./arm64-v8a/libtolua.so
@@ -69,7 +69,7 @@ $NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/arm-linux-andro
 echo "- build tolua_runtime - x86"
 rm ./CMakeCache.txt
 cmake ../ -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI=x86
-make -j 7 
+make -j 10 
 mkdir ./x86
 cp ./libtolua.so ./x86/
 $NDK/toolchains/x86-4.9/prebuilt/darwin-x86_64/i686-linux-android/bin/strip ./x86/libtolua.so

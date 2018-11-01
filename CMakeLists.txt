@@ -6,13 +6,20 @@ include(cmake/ucm.cmake)
 ucm_set_runtime(STATIC)
 
 include_directories(SYSTEM
-    ${tolua_SOURCE_DIR}/luajit-2.1/src
-    #${tolua_SOURCE_DIR}/lua-5.2.4/src
-    #${tolua_SOURCE_DIR}/lua-5.1.5/src
     ${tolua_SOURCE_DIR}/protobuf/include
     ${tolua_SOURCE_DIR}/LuaPbIntf/src
     ${tolua_SOURCE_DIR}/LuaPbIntf/third_party/lua-intf
 )
+if(Darwin)
+    include_directories(SYSTEM
+        ${tolua_SOURCE_DIR}/lua-5.1.5/src
+    )
+else()
+    include_directories(SYSTEM
+        ${tolua_SOURCE_DIR}/luajit-2.1/src
+    )
+endif()
+
 set(tolua_SOURCES
     ${tolua_SOURCE_DIR}/cjson/fpconv.c
     ${tolua_SOURCE_DIR}/cjson/lua_cjson.c

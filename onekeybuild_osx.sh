@@ -30,6 +30,7 @@ find . -name '*.cpp' | xargs sed -i '' 's/google /googlex /g'
 cd ..
 mkdir ./build_osx
 cd ./build_osx
+rm ./CMakeCache.txt
 cmake ../
 make clean
 make -j 6

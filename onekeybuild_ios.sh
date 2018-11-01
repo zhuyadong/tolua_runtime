@@ -9,6 +9,7 @@ find . -name '*.h' | xargs sed -i '' 's/google /googlex /g'
 find . -name '*.cc' | xargs sed -i '' 's/google /googlex /g'
 mkdir ./build_ios
 cd ./build_ios
+rm ./CMakeCache.txt
 cmake ../cmake/ -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DCMAKE_BUILD_TYPE=Release
 make -j 6 libprotobuf
 
@@ -23,6 +24,7 @@ find . -name '*.cpp' | xargs sed -i '' 's/google /googlex /g'
 cd ..
 mkdir ./build_ios
 cd ./build_ios
+rm ./CMakeCache.txt
 cmake ../ -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DCMAKE_BUILD_TYPE=Release
 make -j 7
 

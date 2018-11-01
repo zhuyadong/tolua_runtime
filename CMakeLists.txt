@@ -76,7 +76,7 @@ else()
                 ${tolua_SOURCE_DIR}/android/jni/x86
             )
         endif()
-    elseif(APPLE)
+    elseif(Darwin)
             link_directories(
             ${tolua_SOURCE_DIR}/mac
         )
@@ -97,7 +97,7 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Android")
 	add_library(tolua SHARED
 	    ${tolua_SOURCES}
 	)
-elseif(APPLE)
+elseif(Darwin)
     add_library(tolua MODULE ${tolua_SOURCES})
     set_target_properties(tolua PROPERTIES BUNDLE TRUE)
 else()
@@ -127,7 +127,7 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Android")
             protobuf
 	        log
     )
-elseif(APPLE)
+elseif(Darwin)
     target_link_libraries(tolua
             lua
             protobuf

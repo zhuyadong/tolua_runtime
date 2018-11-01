@@ -20,7 +20,7 @@ echo "./build_osx/libprotobuf.a"
 
 #build tolua_runtime
 cd $basepath
-cp ../build_osx/libprotobuf.a ./mac/
+cp ../protobuf-cpp/build_osx/libprotobuf.a ./mac/
 cd ./LuaPbIntf
 find . -name '*.h' | xargs sed -i '' 's/google:/googlex:/g'
 find . -name '*.cpp' | xargs sed -i '' 's/google:/googlex:/g'
@@ -31,5 +31,6 @@ cd ..
 mkdir ./build_osx
 cd ./build_osx
 cmake ../
+make clean
 make -j 6
 echo tolua.bundle "=>" $(pwd|awk '{print $1"/tolua.bundle"}')

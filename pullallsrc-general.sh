@@ -3,7 +3,7 @@
 #执行onkeybuild_ios.sh编译ios版
 git clone https://github.com/zhuyadong/LuaPbIntf
 git clone  -b 3.6.x --recursive https://github.com/protocolbuffers/protobuf protobuf-cpp
-cd ./protobufcpp
+cd ./protobuf-cpp
 git checkout -b v360 v3.6.0
 cd ..
 git clone https://github.com/zhuyadong/tolua_runtime 

@@ -2752,6 +2752,7 @@ LUALIB_API int tolua_where (lua_State *L, int level)
 }
 
 #ifndef LUA_LJDIR
+#ifndef _WIN32
 #if LUA_VERSION_NUM==501
 LUALIB_API void luaL_setfuncs(lua_State* L, const luaL_Reg* l, int nup)
 {
@@ -2775,6 +2776,6 @@ LUALIB_API lua_Integer lua_tointegerx (lua_State *L, int i, int *isnum) {
   }
   return n;
 }
-
+#endif
 #endif
 #endif

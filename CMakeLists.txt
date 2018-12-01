@@ -16,6 +16,7 @@ include_directories(SYSTEM
     ${tolua_SOURCE_DIR}/LuaPbIntf/src
     ${tolua_SOURCE_DIR}/LuaPbIntf/third_party/lua-intf
 )
+
 if(CMAKE_FORCE_PLATFORM_NAME MATCHES OSX)
     include_directories(SYSTEM
         ${tolua_SOURCE_DIR}/lua-5.1.5/src
@@ -121,19 +122,11 @@ endif()
 
 
 if(MSVC)
-    if(${CMAKE_BUILD_TYPE} MATCHES "Release")
-        target_link_libraries(tolua
-            luajit
-            ws2_32
-            libprotobuf
-            )
-    else()
-        target_link_libraries(tolua
-            luajit
-            ws2_32
-            libprotobuf
-            )
-    endif()
+    target_link_libraries(tolua
+        luajit
+        ws2_32
+        libprotobufd
+        )
 elseif(CMAKE_SYSTEM_NAME MATCHES "Android")
     target_link_libraries(tolua
             luajit

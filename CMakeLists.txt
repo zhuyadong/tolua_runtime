@@ -12,7 +12,7 @@ else()
 endif()
 
 include_directories(SYSTEM
-    ${tolua_SOURCE_DIR}/protobuf/include
+    ${tolua_SOURCE_DIR}/../protobuf-cpp/src
     ${tolua_SOURCE_DIR}/LuaPbIntf/src
     ${tolua_SOURCE_DIR}/LuaPbIntf/third_party/lua-intf
 )
@@ -125,7 +125,7 @@ if(MSVC)
     target_link_libraries(tolua
         luajit
         ws2_32
-        libprotobufd
+        libprotobuf
         )
 elseif(CMAKE_SYSTEM_NAME MATCHES "Android")
     target_link_libraries(tolua
